@@ -44,3 +44,17 @@ timeline-docker-test.png
 
 # Azure configuration (contains secrets)
 azure/azure-config.txt
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Helm
+*.tgz
+
+# Docker
+.dockerignore
+
+# Temporary files
+*.tmp
+*.bak

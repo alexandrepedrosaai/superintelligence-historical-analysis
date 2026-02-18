@@ -1,0 +1,16 @@
+apiVersion: v2
+name: timeline-api
+description: A Helm chart for Superintelligence Timeline API on Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - superintelligence
+  - timeline
+  - api
+  - nodejs
+maintainers:
+  - name: Alexandre Pedrosa Guimarães
+    email: alexandre@superintelligence.ai
+sources:
+  - https://github.com/alexandrepedrosaai/superintelligence-historical-analysis
