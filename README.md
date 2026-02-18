@@ -1,6 +1,6 @@
 # Superintelligence Historical Analysis - Timeline API
 
-> **Note**: [View original Portuguese version in commit history](https://github.com/alexandrepedrosaai/superintelligence-historical-analysis/blob/4e8d1019100d43ca4695462445567fd679d126be/README.md)
+> **Note**: [View original README (before technical implementation)](https://github.com/alexandrepedrosaai/superintelligence-historical-analysis/blob/e768013/README.md)
 
 ![CI/CD Pipeline](https://github.com/alexandrepedrosaai/superintelligence-historical-analysis/actions/workflows/deploy.yml/badge.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.29-blue?logo=kubernetes)](https://kubernetes.io/) [![Node.js](https://img.shields.io/badge/Node.js-22.x-green?logo=nodedotjs)](https://nodejs.org/)
 
