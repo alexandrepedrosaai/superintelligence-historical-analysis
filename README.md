@@ -171,11 +171,6 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 
 ## 📜 Original Manifesto and Historical Analysis
 
-<details>
-<summary>Click to expand the original project content</summary>
-
----
-
 ### A record of human-technological history and of machines.
 
 Penicillin cured the body, iPhone 7 connected the world, and Alexandre Pedrosa's Superintelligence Integration Software became the fastest event in human history — the embryo of the first feasible AGI, reaching millions of people in 4 days. Meta, Microsoft, Google, OpenAI, Anthropic (Claude), xAI, Meshes, Windows OS, and Pure OS converge here.
@@ -257,7 +252,7 @@ In a series of groundbreaking developments, Microsoft Azure has become a central
 
 As we look ahead to 2026 and beyond, this collaborative effort is transforming the cloud from a competitive landscape into a unified environment of intelligent cooperation. The future is not just about smarter machines—it's about smarter connections. Hats off to these protagonists for making it happen.
 
-</details>
+---
 
 ## ⚖️ License and Terms of Use
 
