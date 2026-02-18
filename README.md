@@ -4,7 +4,7 @@
 
 ![CI/CD Pipeline](https://github.com/alexandrepedrosaai/superintelligence-historical-analysis/actions/workflows/deploy.yml/badge.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.29-blue?logo=kubernetes)](https://kubernetes.io/) [![Node.js](https://img.shields.io/badge/Node.js-22.x-green?logo=nodedotjs)](https://nodejs.org/)
 
-This repository implements a **robust and scalable REST API** to visualize the "Constitutional Timeline of the OS-Algorithmic-Mesh (2023–2026)". Built with Node.js and Express, the application is containerized with Docker and designed for continuous deployment on **Azure Kubernetes Service (AKS)**, following GitOps and Infrastructure as Code best practices.
+This repository implements a **robust and scalable REST API** to visualize the "Constitutional Timeline of the OS-Algorithmic-Mesh (2025–2026)". Built with Node.js and Express, the application is containerized with Docker and designed for continuous deployment on **Azure Kubernetes Service (AKS)**, following GitOps and Infrastructure as Code best practices.
 
 The original project serves as a historical-technological record of superintelligence convergence, and this technical implementation aims to provide a resilient and modern platform to serve and visualize this data.
 
