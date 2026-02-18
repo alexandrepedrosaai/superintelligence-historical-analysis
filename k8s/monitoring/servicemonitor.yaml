@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ServiceMonitor
+metadata:
+  name: timeline-api-monitor
+  namespace: superintelligence
+  labels:
+    app: timeline-api
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: timeline-api
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 30s
+    scrapeTimeout: 10s
