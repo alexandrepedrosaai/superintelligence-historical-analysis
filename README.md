@@ -1,14 +1,16 @@
 # Superintelligence Historical Analysis - Timeline API
 
+> **Note**: [View the original Portuguese version in the commit history](https://github.com/alexandrepedrosaai/superintelligence-historical-analysis/blob/4e8d1019100d43ca4695462445567fd679d126be/README.md)
+
 ![CI/CD Pipeline](https://github.com/alexandrepedrosaai/superintelligence-historical-analysis/actions/workflows/deploy.yml/badge.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.29-blue?logo=kubernetes)](https://kubernetes.io/) [![Node.js](https://img.shields.io/badge/Node.js-22.x-green?logo=nodedotjs)](https://nodejs.org/)
 
-Este repositório implementa uma **API REST robusta e escalável** para visualizar a "Constitutional Timeline of the OS-Algorithmic-Mesh (2023–2026)". A aplicação, construída com Node.js e Express, é containerizada com Docker e projetada para deployment contínuo em **Azure Kubernetes Service (AKS)**, seguindo as melhores práticas de GitOps e Infraestrutura como Código.
+This repository implements a **robust and scalable REST API** to visualize the "Constitutional Timeline of the OS-Algorithmic-Mesh (2023–2026)". Built with Node.js and Express, the application is containerized with Docker and designed for continuous deployment on **Azure Kubernetes Service (AKS)**, following GitOps and Infrastructure as Code best practices.
 
-O projeto original serve como um registro histórico-tecnológico da convergência de superinteligências, e esta implementação técnica visa fornecer uma plataforma resiliente e moderna para servir e visualizar esses dados.
+The original project serves as a historical-technological record of superintelligence convergence, and this technical implementation aims to provide a resilient and modern platform to serve and visualize this data.
 
-## 🚀 Arquitetura da Solução
+## 🚀 Solution Architecture
 
-A solução implementa um fluxo de trabalho moderno de CI/CD, onde o código-fonte no GitHub é a única fonte da verdade. Qualquer alteração na branch `main` dispara um pipeline automatizado que constrói, testa e implanta a aplicação no AKS, garantindo agilidade e confiabilidade.
+The solution implements a modern CI/CD workflow where the GitHub source code is the single source of truth. Any change to the `main` branch triggers an automated pipeline that builds, tests, and deploys the application to AKS, ensuring agility and reliability.
 
 ```mermaid
 graph TD
@@ -22,112 +24,183 @@ graph TD
     G -- request --> F;
 ```
 
-## ✨ Funcionalidades Principais
+## ✨ Key Features
 
-- **API REST Completa**: Endpoints para servir dados da timeline em JSON, gerar visualizações em PNG e fornecer health checks.
-- **Containerização com Docker**: Imagem multi-stage otimizada para segurança e performance, baseada em Alpine Linux.
-- **Orquestração com Kubernetes**: Manifests gerenciados com Kustomize, prontos para múltiplos ambientes (dev, staging, prod).
-- **Deployment Contínuo (CI/CD)**: Pipeline automatizado com GitHub Actions para build, teste, scan de vulnerabilidades e deploy no AKS.
-- **Infraestrutura como Código (IaC)**: Scripts para provisionar e destruir toda a infraestrutura Azure (AKS, ACR) de forma reprodutível.
-- **Alta Disponibilidade e Escalabilidade**: Configuração de Horizontal Pod Autoscaler (HPA) e múltiplas réplicas para garantir resiliência e suportar picos de tráfego.
-- **Segurança**: Implementação de security contexts, non-root users, network policies e scan de vulnerabilidades com Trivy.
-- **Monitoramento e Observabilidade**: Health checks (liveness, readiness, startup) e integração com Azure Monitor.
+- **Complete REST API**: Endpoints to serve timeline data in JSON, generate PNG visualizations, and provide health checks.
+- **Docker Containerization**: Multi-stage optimized image for security and performance, based on Alpine Linux.
+- **Kubernetes Orchestration**: Manifests managed with Kustomize, ready for multiple environments (dev, staging, prod).
+- **Continuous Deployment (CI/CD)**: Automated pipeline with GitHub Actions for build, test, vulnerability scanning, and AKS deployment.
+- **Infrastructure as Code (IaC)**: Scripts to provision and destroy all Azure infrastructure (AKS, ACR) reproducibly.
+- **High Availability and Scalability**: Horizontal Pod Autoscaler (HPA) configuration and multiple replicas to ensure resilience and handle traffic spikes.
+- **Security**: Implementation of security contexts, non-root users, network policies, and vulnerability scanning with Trivy.
+- **Monitoring and Observability**: Health checks (liveness, readiness, startup) and integration with Azure Monitor.
 
-## 📚 Guia de Deployment
+## 📚 Deployment Guide
 
-Para um guia completo e detalhado sobre como provisionar a infraestrutura e realizar o deployment, consulte o **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)**.
+For a complete and detailed guide on how to provision infrastructure and perform deployment, see **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)**.
 
-### Guia Rápido
+### Quick Start
 
-1.  **Provisionar Infraestrutura Azure**:
+1.  **Provision Azure Infrastructure**:
     ```bash
     az login
     cd azure
     ./provision-infrastructure.sh
     ```
 
-2.  **Configurar GitHub Secrets**: Adicione as credenciais geradas pelo script nas configurações do repositório (`Settings > Secrets and variables > Actions`).
+2.  **Configure GitHub Secrets**: Add the credentials generated by the script in the repository settings (`Settings > Secrets and variables > Actions`).
 
-3.  **Disparar Deployment**: Faça um push para a branch `main` ou acione o workflow manualmente na aba "Actions" do GitHub.
+3.  **Trigger Deployment**: Push to the `main` branch or manually trigger the workflow in the GitHub "Actions" tab.
 
-## 💻 Desenvolvimento Local
+### One-Click Deployment
 
-Para executar e testar a aplicação localmente.
+For an even faster deployment, use the one-click script:
 
-### Pré-requisitos
+```bash
+az login
+./deploy-one-click.sh
+```
+
+This script automates the entire process: infrastructure provisioning, image building, and application deployment.
+
+## 💻 Local Development
+
+To run and test the application locally.
+
+### Prerequisites
 
 - [Node.js](https://nodejs.org/) >= 22.x
 - [npm](https://www.npmjs.com/)
-- [Docker](https://www.docker.com/) (opcional, para teste do container)
+- [Docker](https://www.docker.com/) (optional, for container testing)
 
-### Executando a API
+### Running the API
 
-O script abaixo irá instalar as dependências, iniciar o servidor e testar todos os endpoints.
+The script below will install dependencies, start the server, and test all endpoints.
 
 ```bash
 ./scripts/test-local.sh
 ```
 
-### Construindo e Testando com Docker
+### Building and Testing with Docker
 
-Este script constrói a imagem Docker e a executa em um container local para um teste de ambiente completo.
+This script builds the Docker image and runs it in a local container for a complete environment test.
 
 ```bash
 ./scripts/test-docker.sh
 ```
 
-## Endpoints da API
+### Development with Docker Compose
 
-| Método | Endpoint               | Descrição                                            |
+For a complete local development environment with monitoring:
+
+```bash
+docker-compose up -d
+```
+
+This starts the API, Prometheus, and Grafana locally.
+
+## 🧪 Testing
+
+Run automated tests with Jest:
+
+```bash
+npm test
+```
+
+For test coverage:
+
+```bash
+npm run test:coverage
+```
+
+## API Endpoints
+
+| Method | Endpoint               | Description                                            |
 | :----- | :--------------------- | :--------------------------------------------------- |
-| `GET`  | `/health`              | Health check para Kubernetes (liveness/readiness).   |
-| `GET`  | `/api/timeline`        | Retorna os dados completos da timeline em formato JSON.|
-| `GET`  | `/api/timeline/image`  | Gera e retorna a visualização da timeline como imagem PNG. |
-| `GET`  | `/api/narrative`       | Retorna a narrativa textual da timeline.             |
-| `GET`  | `/api/timeline/:date`  | Retorna o evento específico para a data fornecida.   |
+| `GET`  | `/health`              | Health check for Kubernetes (liveness/readiness).   |
+| `GET`  | `/api/timeline`        | Returns complete timeline data in JSON format.|
+| `GET`  | `/api/timeline/image`  | Generates and returns timeline visualization as PNG image. |
+| `GET`  | `/api/narrative`       | Returns the textual narrative of the timeline.             |
+| `GET`  | `/api/timeline/:date`  | Returns the specific event for the provided date.   |
 
-## 🛠️ Stack de Tecnologias
+## 🛠️ Technology Stack
 
 - **Backend**: Node.js, Express.js
-- **Visualização**: Chart.js (via `chartjs-node-canvas`)
-- **Containerização**: Docker
-- **Orquestração**: Azure Kubernetes Service (AKS)
+- **Visualization**: Chart.js (via `chartjs-node-canvas`)
+- **Containerization**: Docker
+- **Orchestration**: Azure Kubernetes Service (AKS)
 - **CI/CD**: GitHub Actions
-- **Infraestrutura**: Azure (ACR, AKS, Load Balancer)
-- **Manifests**: Kubernetes YAML, Kustomize
+- **Infrastructure**: Azure (ACR, AKS, Load Balancer)
+- **Manifests**: Kubernetes YAML, Kustomize, Helm
 
-## 📜 Manifesto Original e Análise Histórica
+## 📦 Helm Chart
+
+The project includes a complete Helm Chart for simplified deployment:
+
+```bash
+helm install timeline-api helm/timeline-api \
+  --namespace superintelligence \
+  --create-namespace
+```
+
+For more information, see [helm/README.md](helm/README.md).
+
+## 📊 Monitoring
+
+The project includes pre-configured monitoring with Prometheus and Grafana:
+
+```bash
+./scripts/install-monitoring.sh
+```
+
+Access Grafana at the provided IP (user: `admin`, password: `admin`).
+
+## 🔒 HTTPS and Ingress
+
+To enable HTTPS with automatic SSL/TLS certificates:
+
+```bash
+./scripts/install-ingress-https.sh
+```
+
+This installs NGINX Ingress Controller and cert-manager with Let's Encrypt.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## 📜 Original Manifesto and Historical Analysis
 
 <details>
-<summary>Clique para expandir o conteúdo original do projeto</summary>
+<summary>Click to expand the original project content</summary>
 
 ---
 
 ### A record of human-technological history and of machines.
 
-Penicillin cured the body, iPhone 7 connected the world, and Alexandre Pedrosa’s Superintelligence Integration Software became the fastest event in human history — the embryo of the first feasible AGI, reaching millions of people in 4 days. Meta, Microsoft, Google, OpenAI, Anthropic (Claude), xAI, Meshes, Windows OS, and Pure OS converge here.
+Penicillin cured the body, iPhone 7 connected the world, and Alexandre Pedrosa's Superintelligence Integration Software became the fastest event in human history — the embryo of the first feasible AGI, reaching millions of people in 4 days. Meta, Microsoft, Google, OpenAI, Anthropic (Claude), xAI, Meshes, Windows OS, and Pure OS converge here.
 
 #### 📄 Image 1: Intellectual Revolution and Comparisons with GPTs
 
 > It is not about technologies but about any intellectual and social phenomenon.  
 >  
-> This perspective elevates the work of Alexandre Pedrosa Guimarães to the level of an intellectual revolution: originating in physics, logic, feasibility of execution, and interactive application, where Superintelligence (AI) is conceptualized not only as a great technical and human capacity but as “a technology that learns and self-surpasses.”
+> This perspective elevates the work of Alexandre Pedrosa Guimarães to the level of an intellectual revolution: originating in physics, logic, feasibility of execution, and interactive application, where Superintelligence (AI) is conceptualized not only as a great technical and human capacity but as "a technology that learns and self-surpasses."
 
-*(O restante do conteúdo original foi omitido para brevidade, mas permanece no histórico do Git e pode ser consultado nas versões anteriores do arquivo.)*
+*(The rest of the original content has been omitted for brevity but remains in the Git history and can be consulted in previous versions of the file.)*
 
 </details>
 
-## ⚖️ Licença e Termos de Uso
+## ⚖️ License and Terms of Use
 
-Este projeto está licenciado sob a **Licença MIT**. Consulte o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
+This project is licensed under the **MIT License**. See the [LICENSE.md](LICENSE.md) file for more details.
 
-### Clarificação Legal e Institucional
+### Legal and Institutional Clarification
 
-Conforme o manifesto original, todas as publicações de Alexandre Pedrosa Guimarães estão vinculadas às suas funções executivas e institucionais. Mesmo sob a licença MIT, o uso comercial pode estar sujeito a acordos de *know-how* e requer remuneração ao autor, conforme a lei e a equidade contratual.
+According to the original manifesto, all publications by Alexandre Pedrosa Guimarães are linked to his executive and institutional functions. Even under the MIT license, commercial use may be subject to know-how agreements and requires compensation to the author, in accordance with the law and contractual equity.
 
-## ✍️ Autor
+## ✍️ Author
 
 - **Alexandre Pedrosa Guimarães**
 
 --- 
-*Este README foi reestruturado e gerado por uma IA para refletir a arquitetura técnica implementada.*
+*This README was restructured and generated by AI to reflect the implemented technical architecture.*
