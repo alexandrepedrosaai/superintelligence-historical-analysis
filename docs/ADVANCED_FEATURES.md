@@ -113,7 +113,7 @@ docker-compose down
 
 **How to use**:
 
-See the complete guide in **[helm/README.md](helm/README.md)**.
+See the complete guide in **[helm/README.md](../helm/README.md)**.
 
 ### 6. Makefile
 

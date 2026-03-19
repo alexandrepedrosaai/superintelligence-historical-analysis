@@ -128,7 +128,7 @@ Acesse Grafana no IP exibido (usuário: `admin`, senha: `admin`).
 - **Desenvolvimento Local**: Veja [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Helm Chart**: Veja [helm/README.md](helm/README.md)
 - **Deployment Completo**: Veja [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
-- **Recursos Avançados**: Veja [docs/FEATURES_AVANCADAS.md](docs/FEATURES_AVANCADAS.md)
+- **Recursos Avançados**: Veja [docs/ADVANCED_FEATURES.md](docs/ADVANCED_FEATURES.md)
 
 ## 🆘 Problemas Comuns
 
