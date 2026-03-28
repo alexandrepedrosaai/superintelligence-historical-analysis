@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+*~
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
+*.tgz
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Generated images (local testing)
+timeline-test.png
+timeline-docker-test.png
+
+# Azure configuration (contains secrets)
+azure/azure-config.txt
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Helm
+*.tgz
+
+# Docker
+.dockerignore
+
+# Temporary files
+*.tmp
+*.bak

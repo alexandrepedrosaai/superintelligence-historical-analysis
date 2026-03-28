@@ -1,0 +1,152 @@
+---
+# Source: timeline-api/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: timeline-api
+  labels:
+    helm.sh/chart: timeline-api-1.0.0
+    app.kubernetes.io/name: timeline-api
+    app.kubernetes.io/instance: timeline-api
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: timeline-api/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: timeline-api
+  labels:
+    helm.sh/chart: timeline-api-1.0.0
+    app.kubernetes.io/name: timeline-api
+    app.kubernetes.io/instance: timeline-api
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 3000
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: timeline-api
+    app.kubernetes.io/instance: timeline-api
+---
+# Source: timeline-api/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timeline-api
+  labels:
+    helm.sh/chart: timeline-api-1.0.0
+    app.kubernetes.io/name: timeline-api
+    app.kubernetes.io/instance: timeline-api
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: timeline-api
+      app.kubernetes.io/instance: timeline-api
+  template:
+    metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: "3000"
+        prometheus.io/scrape: "true"
+      labels:
+        app.kubernetes.io/name: timeline-api
+        app.kubernetes.io/instance: timeline-api
+    spec:
+      imagePullSecrets:
+        - name: acr-secret
+      serviceAccountName: timeline-api
+      securityContext:
+        fsGroup: 1001
+      containers:
+      - name: timeline-api
+        securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+            runAsUser: 1001
+        image: "superintelligenceacr.azurecr.io/superintelligence-timeline:latest"
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: production
+        - name: PORT
+          value: "3000"
+        - name: LOG_LEVEL
+          value: info
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 3
+        startupProbe:
+          failureThreshold: 30
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+---
+# Source: timeline-api/templates/hpa.yaml
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: timeline-api
+  labels:
+    helm.sh/chart: timeline-api-1.0.0
+    app.kubernetes.io/name: timeline-api
+    app.kubernetes.io/instance: timeline-api
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: timeline-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
