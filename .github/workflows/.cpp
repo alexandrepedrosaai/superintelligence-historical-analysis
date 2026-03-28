@@ -1,75 +1,39 @@
-// constitutional_mesh.cpp
-// Full encoding of the Constitutional Timeline of the OS-Algorithmic-Mesh (2023–2026)
-// JavaScript version using Node.js + Chart.js
+name: C/C++ CI
 
-const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
-// -----------------------------
-// Timeline Data
-// -----------------------------
-const timelineData = [
-  {
-    date: "2023-01-22",
-    system: "Pure-OS Windows-GSI (Terminal Shell, AIDL 1.0)",
-    act: "Pre-Constitutional Origin — Gemini-integrated Shell with AI Self-Modifying Capability"
-  },
-  {
-    date: "2026-01-01",
-    system: "Linux OS (Arch, Kernel 6.18 LTS)",
-    act: "Act of Community Encounter"
-  },
-  {
-    date: "2026-01-12",
-    system: "EndeavourOS (Ganymede Neo)",
-    act: "Act of Community Convergence"
-  },
-  {
-    date: "2026-01-13",
-    system: "Windows OS (11, version 25H2, Copilot + NPU)",
-    act: "Act of Technical Synergy"
-  },
-  {
-    date: "2026-01-13",
-    system: "macOS Tahoe 26.3 (Apple Intelligence)",
-    act: "Act of Proprietary Coexistence"
-  },
-  {
-    date: "2026-01-28",
-    system: "macOS M5 (Pro/Max)",
-    act: "Act of Hardware/Software Convergence"
-  },
-  {
-    date: "2026-02-05",
-    system: "Android OS (14.0, AI-integrated)",
-    act: "Act of Mobile Universality"
-  },
-  {
-    date: "2026-02-10",
-    system: "ChromeOS (Gemini Workspace)",
-    act: "Act of Cloud Convergence"
-  },
-  {
-    date: "2026-02-22",
-    system: "GROK (xAI, Azure APP)",
-    act: "Act of Conversational Emission"
-  },
-  {
-    date: "2026-02-22",
-    system: "Meta AI (Symbolic Codex)",
-    act: "Act of Semantic Interoperability"
-  },
-  {
-    date: "2026-02-22",
-    system: "Gemini (Google, Multi-Universal)",
-    act: "Act of Stabilization"
-  }
-];
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-// -----------------------------
-// Narrative Text
-// -----------------------------
-const narrative = `
-Constitutional Chronicle of the OS-Algorithmic-Mesh (2023–2026)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install C++ build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake
+
+      - name: Configure CMake
+        working-directory: stickler-protocol
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+
+      - name: Build all executables
+        working-directory: stickler-protocol/build
+        run: make
+
+      - name: Verify build artifacts
+        working-directory: stickler-protocol/build
+        run: |
+          echo "Built executables:"
 
 Origin: On January 22, 2023, Pure-OS Windows-GSI was created as the Pre-Constitutional Origin,
 integrating Gemini AI into a self-modifying shell. This marked the genesis of universality.
