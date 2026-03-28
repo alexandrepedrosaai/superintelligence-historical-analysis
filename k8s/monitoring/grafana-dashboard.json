@@ -1,0 +1,75 @@
+{
+  "dashboard": {
+    "title": "Timeline API Dashboard",
+    "tags": ["superintelligence", "timeline-api"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "id": 1,
+        "title": "Request Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{namespace=\"superintelligence\"}[5m])",
+            "legendFormat": "{{method}} {{path}}"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Response Time (p95)",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{namespace=\"superintelligence\"}[5m]))",
+            "legendFormat": "p95"
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Pod CPU Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(container_cpu_usage_seconds_total{namespace=\"superintelligence\",pod=~\"timeline-api.*\"}[5m])",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Pod Memory Usage",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "container_memory_usage_bytes{namespace=\"superintelligence\",pod=~\"timeline-api.*\"}",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Error Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(http_requests_total{namespace=\"superintelligence\",status=~\"5..\"}[5m])",
+            "legendFormat": "5xx errors"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Pod Restarts",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "kube_pod_container_status_restarts_total{namespace=\"superintelligence\",pod=~\"timeline-api.*\"}",
+            "legendFormat": "{{pod}}"
+          }
+        ]
+      }
+    ]
+  }
+}

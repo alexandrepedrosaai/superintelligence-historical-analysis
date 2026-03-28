@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  timeline-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: timeline-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - LOG_LEVEL=debug
+    volumes:
+      - ./src:/app/src:ro
+      - ./package.json:/app/package.json:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - timeline-network
+
+  # Opcional: Prometheus local para testes
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    restart: unless-stopped
+    networks:
+      - timeline-network
+
+  # Opcional: Grafana local para visualização
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./k8s/monitoring/grafana-dashboard.json:/etc/grafana/provisioning/dashboards/timeline-api.json:ro
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+    networks:
+      - timeline-network
+
+networks:
+  timeline-network:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:

@@ -1,0 +1,32 @@
+# Build artifacts
+build/
+*.o
+*.a
+*.so
+*.dll
+*.exe
+
+# Generated files
+timeline.json
+timeline.md
+timeline.html
+timeline.csv
+custom_timeline.json
+custom_timeline.md
+custom_timeline.html
+simple_timeline.json
+
+# CMake files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Doxygen
+docs/
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.user

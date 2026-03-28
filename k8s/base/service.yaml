@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: timeline-api-service
+  namespace: superintelligence
+  labels:
+    app: timeline-api
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "false"
+spec:
+  type: LoadBalancer
+  selector:
+    app: timeline-api
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 3000
+  sessionAffinity: None
+  externalTrafficPolicy: Local
